@@ -1,0 +1,46 @@
+
+create table APP.CAR(CAR_ID int,NAME varchar(40),COLOR varchar(20))
+create table APP.SHOWROOM (SHOWROOM_ID int,MANAGER varchar(30),LOCATION varchar(100))
+commit;
+
+alter table APP.CAR add SHOWROOM_ID int
+
+
+use them later on
+-- Table for showroom.
+CREATE TABLE showroom_list_ann (
+SHOWROOM_ID int(10) NOT NULL AUTO_INCREMENT,
+location varchar(255) DEFAULT NULL,
+manager varchar(255) DEFAULT NULL,
+PRIMARY KEY (SHOWROOM_ID)
+)
+-- Table for cars
+CREATE TABLE car_list (
+CAR_ID int(11) NOT NULL AUTO_INCREMENT,
+color varchar(255) DEFAULT NULL,
+name varchar(255) DEFAULT NULL,
+SHOWROOM_ID int(11) DEFAULT NULL,
+PRIMARY KEY (CAR_ID),
+FOREIGN KEY (SHOWROOM_ID) REFERENCES showroom_list_ann (SHOWROOM_ID)
+)
+
+
+drop table APP.SHOWROOM
+
+drop table APP.CAR
+
+CREATE TABLE APP.showroom_list (
+SHOWROOM_ID int NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+location varchar(255),
+manager varchar(255),
+PRIMARY KEY (SHOWROOM_ID)
+)
+
+CREATE TABLE APP.car_list (
+CAR_ID int NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+color varchar(255) DEFAULT NULL,
+name varchar(255) DEFAULT NULL,
+SHOWROOM_ID int DEFAULT NULL,
+PRIMARY KEY (CAR_ID),
+FOREIGN KEY (SHOWROOM_ID) REFERENCES showroom_list (SHOWROOM_ID)
+)
